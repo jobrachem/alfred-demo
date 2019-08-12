@@ -1,4 +1,4 @@
-# Template for Alfred Experiments
+# Demo for Alfred Experiments
 
 This a demo for script-based experiments in the Python 3 library alfred ([https://github.com/ctreffe/alfred](https://github.com/ctreffe/alfred)).
 
