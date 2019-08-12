@@ -17,4 +17,4 @@ pip install git+https://github.com/ctreffe/alfred.git@master#egg=alfred
 ```bash
 git clone https://github.com/jobrachem/alfred-demo.git
 ```
-5. Run the template with the following command: `python run.py`
+5. Run the experiment with the following command: `python run.py`
