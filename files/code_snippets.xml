@@ -1,0 +1,74 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<instr>
+    <iExample>
+        <!-- Dies ist ein Kommentarfeld, das nicht eingelesen wird, sondern lediglich der Erläuterung von Einträgen dient -->
+        Hier kann beliebiger Text eingelesen werden. Leerzeichen und Tabs, sowie Zeilenumbrüche werden dabei mit eingelesen!
+
+        Die hier vergebenen Objektnamen (innerhalb der Komparatorzeichen ober- und unterhalb der Texte) werden von alfred interpretiert und zur Zuordnung genutzt. Sie können daher nicht ohne weiteres verändert werden! Jede Änderung an Objektnamen muss auch in der Experimentalskripten berücksichtigt werden!
+
+        Der Header der XML-Datei sollte unverändert bleiben, außer wenn eine andere Zeichenkodierung genutzt wird! Die Standardkodierung ist utf-8.
+
+        Es besteht die Möglichkeit HTML-Tags in den einzelnen Instruktionen zu verwenden. Soll dies passieren, muss aber ein besonderes Tag um den Instruktionstext herum gesetzt werden, welches wie folgt aussieht:
+
+        <![CDATA[    Hier innerhalb der eckigen Klammern können HTML-Tags benutzt werden, die alfred anschließend auch erkennt   ]]>
+
+        Diese Beispielinstruktion sollte nicht gelöscht werden!
+    </iExample>
+
+    <c10>
+# ... is a placeholder for the text that you see here
+# you can use html in a TextElement to format your text
+# you should always assign a name to your elements
+# alignment="left" and font_size="normal" are the defaults
+t10 = TextElement(text="...", name="text10", alignment="left", font_size="normal")
+    </c10>
+
+    <c20>
+p20 = WebCompositePage(title="Adding Elements to Pages")  # initialize the page
+
+p20_t10 = TextElement("...")  # create a TextElement
+c20 = CodeElement("...", lang="python")  # create a CodeElement (this is what displays the code that you see here.)
+
+p20.append(t10, c20)  # append elements to page
+    </c20>
+
+    <c30>
+# --- page 10 --- #
+p10 = WebCompositePage(title="Welcome to Alfred!")
+
+t10 = TextElement("...")
+c10 = CodeElement("...", lang="python")
+t20 = TextElement("...")
+p10.append(t10, c10, t20)
+
+# --- page 20 --- #
+p20 = WebCompositePage(title="Pages and Sections")
+
+# code for section: elements to pages
+t30 = TextElement("...")
+c20 = CodeElement("...", lang="python")
+
+# code for section: pages to sections
+t40 = TextElement("...")
+c30 = CodeElement("...", lang="python")
+
+# code for section: sections to experiment
+t50 = TextElement("...")
+c40 = CodeElement("...", lang="python")
+
+# append elements to p20
+p20.append(t30, c20, t40, c30, t50, c40)
+
+# --- Initialize and fill sections --- #
+main = Section()
+main.append(p10, p20)        
+    </c30>
+
+    <c40>
+# Append sections to experiment
+# You can also append single pages here
+exp.page_controller.append(main)
+    </c40>
+
+
+</instr>

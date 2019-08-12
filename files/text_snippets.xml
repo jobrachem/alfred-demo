@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instr>
+    <iExample>
+        <!-- Dies ist ein Kommentarfeld, das nicht eingelesen wird, sondern lediglich der Erläuterung von Einträgen dient -->
+        Hier kann beliebiger Text eingelesen werden. Leerzeichen und Tabs, sowie Zeilenumbrüche werden dabei mit eingelesen!
+
+        Die hier vergebenen Objektnamen (innerhalb der Komparatorzeichen ober- und unterhalb der Texte) werden von alfred interpretiert und zur Zuordnung genutzt. Sie können daher nicht ohne weiteres verändert werden! Jede Änderung an Objektnamen muss auch in der Experimentalskripten berücksichtigt werden!
+
+        Der Header der XML-Datei sollte unverändert bleiben, außer wenn eine andere Zeichenkodierung genutzt wird! Die Standardkodierung ist utf-8.
+
+        Es besteht die Möglichkeit HTML-Tags in den einzelnen Instruktionen zu verwenden. Soll dies passieren, muss aber ein besonderes Tag um den Instruktionstext herum gesetzt werden, welches wie folgt aussieht:
+
+        <![CDATA[    Hier innerhalb der eckigen Klammern können HTML-Tags benutzt werden, die alfred anschließend auch erkennt   ]]>
+
+        Diese Beispielinstruktion sollte nicht gelöscht werden!
+    </iExample>
+
+    <t10>
+        <![CDATA[
+            <h4>About Alfred</h4>
+            This is a demo experiment, providing an overview of Alfred's basic features. Alfred is an open source software package that allows for the creation of extremely versatile web-based surveys and experiments for the social sciences. 
+
+            Alfred's source code is hosted on GitHub (<a href="https://github.com/ctreffe/alfred">https://github.com/ctreffe/alfred</a>) and can be cited with a DOI from Zenodo (<a href="https://zenodo.org/badge/latestdoi/150700371">Alfred on Zenodo</a>).
+
+            If you are publishing research conducted using Alfred, please cite it.
+
+            <h4>About this demo experiment</h4>
+            This demo experiment presents Alfred's basic functionality along with the code. As an example, this text is entered into the experiment using a <code>TextElement()</code>. 
+
+            Click on "Show/Hide Code" below to see the source code for a <code>TextElement()</code>.
+        ]]>
+    </t10>
+
+    <t20>
+        <![CDATA[
+            Click the "Continue" button below to start the demo experiment.
+        ]]>
+        
+    </t20>
+
+    <t30>
+        <![CDATA[
+            <h4>Adding Elements to Pages</h4>
+            Elements like the <code>TextElement()</code> always need to be added to a <b>page</b>. For web-experiments, the standard page class to use is <code>WebCompositePage()</code>. You add an element to a page with the page's <code>.append()</code> method. 
+
+            Click on "Show/Hide Code" below to see the source code for the current page.
+        ]]>
+    </t30>
+
+    <t40>
+        <![CDATA[
+            <h4>Adding Pages to Sections</h4>
+            To control, how your participants can move through the pages of your experiment, you should always use <b>sections</b>. There are currently three types of sections:
+
+            <code>Section()</code>: Participants can move freely forward and backward through all pages contained in this section. This also means, that they can even move to the next page without filling out forced-input elements.
+
+            <code>HeadOpenSection()</code>: Participants can move freely forward and backward through all pages contained in this section. They can only move forward to the next page, if they filled out all forced-input elements.
+
+            <code>SegmentedSection()</code>: Participants can only move forward, but not backward inside this section. They can only move forward to the next page, if they filled out all forced-input elements.
+
+            You can add pages to a section using the section's <code>.append()</code> method. You can nest sections as you please.
+
+            Click on "Show/Hide Code" below to see the source code for the first two pages of this demo experiment, which are added to a standard section.
+            
+        ]]>
+    </t40>
+
+    <t50>
+        <![CDATA[
+            <h4>Adding Sections to the Experiment</h4>
+            After adding your pages to sections, you need to add the sections to your experiment. You can do so by adding them in the <code>experiment.page_controller</code>'s <code>.append()</code> method near the end of your script.py file.
+
+            Click on "Show/Hide Code" below to see the source code for adding the "main" section from above to the experiment.
+            
+        ]]>
+    </t50>
+
+</instr>
