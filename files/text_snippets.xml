@@ -75,4 +75,18 @@
         ]]>
     </t50>
 
+    <t70><![CDATA[
+            <hr><code>RegEntryElement()</code>
+            
+            These input elements allow you to define a custom regular expression (regex) for the validation of user input. A regex is a special text string for describing a search pattern. If you want to learn more about regex, you can start with this thread on StackOverflow.com: <a href="https://stackoverflow.com/questions/4736/learning-regular-expressions">Link</a>
+        ]]>
+    </t70>
+
+    <t80><![CDATA[
+            <hr><code>NumberEntryElement()</code>
+
+            Note: The NumberEntryElement interprets both a comma (,) and a dot (.) as decimal separators.
+        ]]>
+    </t80>
+
 </instr>

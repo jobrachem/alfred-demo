@@ -24,7 +24,10 @@ t10 = TextElement(text="...", name="text10", alignment="left", font_size="normal
     </c10>
 
     <c20>
-p20 = WebCompositePage(title="Adding Elements to Pages")  # initialize the page
+# initialize the page
+p20 = WebCompositePage(title="Adding Elements to Pages", 
+                       uid="page20")  # The uid allows you to find data from this page
+                                      # and use it on other pages. 
 
 p20_t10 = TextElement("...")  # create a TextElement
 c20 = CodeElement("...", lang="python")  # create a CodeElement (this is what displays the code that you see here.)
@@ -34,7 +37,10 @@ p20.append(t10, c20)  # append elements to page
 
     <c30>
 # --- page 10 --- #
-p10 = WebCompositePage(title="Welcome to Alfred!")
+p10 = WebCompositePage(title="Welcome to Alfred!", 
+                       uid="page10")    # The uid allows you to find data from this page
+                                        # and use it on other pages. 
+
 
 t10 = TextElement("...")
 c10 = CodeElement("...", lang="python")
@@ -42,7 +48,7 @@ t20 = TextElement("...")
 p10.append(t10, c10, t20)
 
 # --- page 20 --- #
-p20 = WebCompositePage(title="Pages and Sections")
+p20 = WebCompositePage(title="Pages and Sections", uid="page20")
 
 # code for section: elements to pages
 t30 = TextElement("...")
@@ -70,5 +76,153 @@ main.append(p10, p20)
 exp.page_controller.append(main)
     </c40>
 
+    <c50>
+textentry10 = TextEntryElement(
+    instruction="Please enter some text.",
+    name="textentry10",     # name in data set
+    alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    default="default",      # default input value
+    prefix=None,            # prefix to be displayed lefthand of the input area
+    suffix="suffix",        # suffix to be displayed righthand of the input area
+    force_input=True        # make input mandatory
+)
+    </c50>
+
+    <c60>
+textarea10 = TextAreaElement(
+    instruction="Enter some more text.",
+    name="textarea10",      # name in data set. You should always give names to your input elements.
+    alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    x_size=450,             # horizontal size in pixels
+    y_size=150,             # vertical size in pixels
+    default="Default",      # default input value
+    force_input=True        # make input mandatory. It's optional by default.
+)
+    </c60>
+
+    <c70>
+regentry10 = RegEntryElement(
+    instruction="Enter an E-Mail address",
+    name="regentry10",           # name in data set. You should always give names to your input elements.
+    alignment="left",            # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",          # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    reg_ex=r"[^@]+@[^\.]+\..+",  # regular expression for validation of user input. This is a very basic regex for email addresses.
+    default="invalid input",     # default input value
+    prefix=None,                 # prefix to be displayed lefthand of the input area
+    suffix=None,                 # suffix to be displayed righthand of the input area
+    force_input=False,           # if True, input is mandatory. It's False by default.
+    match_hint="Message."        # hint to be displayed, if user input doesn't match the regular expression
+)
+    </c70>
+
+    <c80>
+numberentry10 = NumberEntryElement(
+    instruction="Enter a number",
+    name="numberentry10",           # name in data set. You should always give names to your input elements.
+    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    decimals=3,                     # number of decimals allowed
+    min=1.3,                        # minimum allowed value
+    max=3.7,                        # maximum allowed value
+    default=1,                      # default input value
+    prefix=None,                    # prefix to be displayed lefthand of the input area
+    suffix="suffix",                # suffix to be displayed righthand of the input area
+    force_input=True                # if True, input is mandatory. It's False by default.
+)
+    </c80>
+
+    <c90>
+password10 = PasswordElement(
+    instruction="Enter a password",
+    name="password10",      # name in data set. You should always give names to your input elements.
+    alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    password="friend",      # this is the password that needs to be entered
+    default="Speak friend and enter.",                  # default input value
+    prefix=None,                                        # prefix to be displayed lefthand of the input area
+    suffix=None,                                        # suffix to be displayed righthand of the input area
+    force_input=False,                                  # if True, input is mandatory. It's False by default.
+    wrong_password_hint="The password is 'friend'."     # hint to be displayed if a wrong password is entered
+)        
+    </c90>
+
+    <c100>
+singlechoice10 = SingleChoiceElement(
+    instruction="Choose something",
+    name="singlechoice10",          # name in data set. You should always give names to your input elements.
+    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    default=1,                      # default input value (integer). The number refers to the position of the choice as defined in the item_labels argument.
+    table_striped=False,            # if True, the element is displayed with a striped layout
+    item_labels=["Choice 1",        # definition of available choices. Should be a list of strings.
+                 "Choice 2",        # each element of the list is a choice
+                 "Choice 3"],
+    shuffle=False,                  # default: False. If True, the order of available choices is shuffled
+    force_input=True                # if True, input is mandatory. It's False by default.
+)
+    </c100>
+    
+
+    <c110>
+multiplechoice10 = MultipleChoiceElement(
+    instruction="Choose something",
+    name="multiplechoice10",        # name in data set. You should always give names to your input elements.
+    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    default=["0", "1", "0"],        # default: None. If specified, should be a list of the same length as item_labels.
+                                    # A "1" means, the box should be ticked, a "0" means it should not be ticked.
+    table_striped=False,            # if True, the element is displayed with a striped layout
+    item_labels=["Choice 1",        # definition of available choices. Should be a list of strings.
+                 "Choice 2",        # each element of the list is a choice
+                 "Choice 3"],
+    shuffle=False,                  # default: False
+    force_input=True                # if True, input is mandatory. It's False by default.
+)        
+    </c110>
+
+    <c120>
+likertelement10 = LikertElement(
+    instruction="Choose something",
+    name="likertelement10",         # name in data set. You should always give names to your input elements.
+    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    levels=7,                       # number of levels. Default: 7
+    default=None,                   # default input value (integer, indicating the default level)
+    item_labels=["Left label", "Right label"],      # labels to the left and right side
+    top_scale_labels=[                              # labels to be shown above each level (list with one element per level)
+        "1", "2", "3", "4",
+        "5", "6", "7"],
+    bottom_scale_labels=None,       # labels to be shown below each choice (like top_scale_labels)
+    transpose=False,                # default: False. If True, the levels are stacked vertically instead of horizontally
+    spacing=30,                     # default: 30. How much space (in px) should be between the levels
+    force_input=False               # if True, input is mandatory. It's False by default.
+)
+    </c120>
+
+    <c130>
+likertmatrix10 = LikertMatrix(
+    instruction="Enter something",
+    name="likertmatrix10",          # name in data set. You should always give names to your input elements.
+    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+    levels=5,                       # number of levels. Default: 7
+    items=3,                        # number of items. Default: 4
+    default=None,                   # default input value (integer, indicating the default level). The same default is used for all items.
+    item_labels=[                   # labels to the left and right side. Each item is associated with two elements of the list.
+        "item 1, left", "item 1, right",
+        "item 2, left", "item 2, right",
+        "item 3, left", "item 3, right"
+    ],
+    top_scale_labels=["1", "2", "3", "4", "5"],     # labels to be shown above each level (list with one element per level)
+    bottom_scale_labels=None,                       # labels to be shown below each choice (like top_scale_labels)
+    transpose=False,                # if True, items are shown in columns instead of rows
+    table_striped=False,            # if True, the element is displayed with a striped layout
+    shuffle=False,                  # default: False. If True, the order of available choices is shuffled
+    spacing=30,                     # default: 30. How much space (in px) should be between the levels
+    force_input=False               # if True, input is mandatory. It's False by default.
+)
+    </c130>
 
 </instr>
