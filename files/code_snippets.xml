@@ -37,33 +37,10 @@ p20.append(t10, c20)  # append elements to page
 
     <c30>
 # --- page 10 --- #
-p10 = WebCompositePage(title="Welcome to Alfred!", 
-                       uid="page10")    # The uid allows you to find data from this page
-                                        # and use it on other pages. 
-
-
-t10 = TextElement("...")
-c10 = CodeElement("...", lang="python")
-t20 = TextElement("...")
-p10.append(t10, c10, t20)
+p10 = WebCompositePage(title="Welcome to Alfred!", uid="page10")
 
 # --- page 20 --- #
 p20 = WebCompositePage(title="Pages and Sections", uid="page20")
-
-# code for section: elements to pages
-t30 = TextElement("...")
-c20 = CodeElement("...", lang="python")
-
-# code for section: pages to sections
-t40 = TextElement("...")
-c30 = CodeElement("...", lang="python")
-
-# code for section: sections to experiment
-t50 = TextElement("...")
-c40 = CodeElement("...", lang="python")
-
-# append elements to p20
-p20.append(t30, c20, t40, c30, t50, c40)
 
 # --- Initialize and fill sections --- #
 main = Section()
@@ -80,7 +57,7 @@ exp.page_controller.append(main)
 textentry10 = TextEntryElement(
     instruction="Please enter some text.",
     name="textentry10",     # name in data set
-    alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",       # this is the defaullt alignment. Also possible: "center" | "right"
     font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     default="default",      # default input value
     prefix=None,            # prefix to be displayed lefthand of the input area
@@ -93,7 +70,7 @@ textentry10 = TextEntryElement(
 textarea10 = TextAreaElement(
     instruction="Enter some more text.",
     name="textarea10",      # name in data set. You should always give names to your input elements.
-    alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",       # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     x_size=450,             # horizontal size in pixels
     y_size=150,             # vertical size in pixels
@@ -106,7 +83,7 @@ textarea10 = TextAreaElement(
 regentry10 = RegEntryElement(
     instruction="Enter an E-Mail address",
     name="regentry10",           # name in data set. You should always give names to your input elements.
-    alignment="left",            # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",            # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",          # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     reg_ex=r"[^@]+@[^\.]+\..+",  # regular expression for validation of user input. This is a very basic regex for email addresses.
     default="invalid input",     # default input value
@@ -121,7 +98,7 @@ regentry10 = RegEntryElement(
 numberentry10 = NumberEntryElement(
     instruction="Enter a number",
     name="numberentry10",           # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     decimals=3,                     # number of decimals allowed
     min=1.3,                        # minimum allowed value
@@ -137,7 +114,7 @@ numberentry10 = NumberEntryElement(
 password10 = PasswordElement(
     instruction="Enter a password",
     name="password10",      # name in data set. You should always give names to your input elements.
-    alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",       # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     password="friend",      # this is the password that needs to be entered
     default="Speak friend and enter.",                  # default input value
@@ -152,7 +129,7 @@ password10 = PasswordElement(
 singlechoice10 = SingleChoiceElement(
     instruction="Choose something",
     name="singlechoice10",          # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     default=1,                      # default input value (integer). The number refers to the position of the choice as defined in the item_labels argument.
     table_striped=False,            # if True, the element is displayed with a striped layout
@@ -169,7 +146,7 @@ singlechoice10 = SingleChoiceElement(
 multiplechoice10 = MultipleChoiceElement(
     instruction="Choose something",
     name="multiplechoice10",        # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     default=["0", "1", "0"],        # default: None. If specified, should be a list of the same length as item_labels.
                                     # A "1" means, the box should be ticked, a "0" means it should not be ticked.
@@ -186,7 +163,7 @@ multiplechoice10 = MultipleChoiceElement(
 likertelement10 = LikertElement(
     instruction="Choose something",
     name="likertelement10",         # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     levels=7,                       # number of levels. Default: 7
     default=None,                   # default input value (integer, indicating the default level)
@@ -205,7 +182,7 @@ likertelement10 = LikertElement(
 likertmatrix10 = LikertMatrix(
     instruction="Enter something",
     name="likertmatrix10",          # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
     font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
     levels=5,                       # number of levels. Default: 7
     items=3,                        # number of items. Default: 4
@@ -224,5 +201,22 @@ likertmatrix10 = LikertMatrix(
     force_input=False               # if True, input is mandatory. It's False by default.
 )
     </c130>
+
+    <page_code10>
+looped_pages = Section()    # Standard section. This will contain all pages created by the loop.
+n_pages = 3                 # Number of pages to create
+
+for i in range(n_pages):    # Loop for page creation.
+    i += 1                  # Since Python starts counting at 0, we add 1 to get the actual page number
+
+    # The following code defines a single page, using the index i to vary content.
+    page = WebCompositePage(title="Looped page {}".format(i), uid="looped_page{}".format(i))
+    page_text10 = el.TextElement("This is looped page number {}".format(i))
+    page_text20 = el.TextElement(texts["page_text20"])
+    page_code10 = el.CodeElement(code["page_code10"], lang="python")
+    page.append(page_text10, page_text20, page_code10)
+
+    looped_pages.append(page)   # Add the page to our section at the end of each iteration.
+    </page_code10>
 
 </instr>

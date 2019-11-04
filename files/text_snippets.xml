@@ -60,7 +60,7 @@
 
             You can add pages to a section using the section's <code>.append()</code> method. You can nest sections as you please.
 
-            Click on "Show/Hide Code" below to see the source code for the first two pages of this demo experiment, which are added to a standard section.
+            Click on "Show/Hide Code" below to see the source code for the first two pages of this demo experiment, which are added to a standard section. For the sake of brevity, we omitted the display elements of the pages in the code chunk.
             
         ]]>
     </t40>
@@ -88,5 +88,11 @@
             Note: The NumberEntryElement interprets both a comma (,) and a dot (.) as decimal separators.
         ]]>
     </t80>
+
+    <page_text20><![CDATA[
+            Looped pages are handy, if you want to create multiple pages with similar structure but differing content. Below, you can see the code used to create the three looped pages in this demo experiment.
+        ]]>
+
+    </page_text20>
 
 </instr>
