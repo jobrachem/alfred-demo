@@ -1,24 +1,9 @@
-# -*- coding:utf-8 -*-
-'''
-Experiment script using Alfred - A library for rapid experiment development.
 
-Experiment author: Johannes Brachem <brachem@psych.uni-goettingen.de>
-
-Description: This is a showcase experiment, providing an overview of alfred's basic features.
-'''
-
-
-#################################
-# - Section 1: Module imports - #
-#################################
-
-from alfred.page import *
-from alfred.section import *
-from alfred.element import *
-from alfred.layout import *
-from alfred.helpmates import *
-
-from alfred import Experiment
+from alfred.page import WebCompositePage
+from alfred.section import Section
+from alfred.helpmates import parse_xml_to_dict
+import alfred.element as el
+import alfred
 
 
 #################################################
@@ -27,7 +12,7 @@ from alfred import Experiment
 EXP_TYPE = "web"
 EXP_NAME = "Alfred Demo"
 EXP_VERSION = "1.0"
-EXP_AUTHOR_MAIL = "brachem@psych.uni-goettingen.de"
+EXP_AUTHOR_MAIL = "jbrachem@posteo.de"
 
 
 # import the .xml file, containing text snippets
@@ -39,11 +24,10 @@ code = parse_xml_to_dict("files/code_snippets.xml", code=True)
 #################################
 
 
-class ExitEnabler(Element, WebElementInterface):
+class ExitEnabler(el.Element, el.WebElementInterface):
     """
     Add this invisible element to any WebCompositeQuestion to allow easy leaving without warning message.
     """
-
     @property
     def web_widget(self):
         widget = "<script>$(document).ready(function(){glob_unbind_leaving();});</script>"
@@ -58,7 +42,7 @@ class ExitEnabler(Element, WebElementInterface):
 class Script(object):
 
     def generate_experiment(self):
-        exp = Experiment(EXP_TYPE, EXP_NAME, EXP_VERSION, EXP_AUTHOR_MAIL)
+        exp = alfred.Experiment(EXP_TYPE, EXP_NAME, EXP_VERSION, EXP_AUTHOR_MAIL)
 
         # --- START OF EDITABLE AREA --- #
 
@@ -67,25 +51,25 @@ class Script(object):
         # --- page 10 --- #
         p10 = WebCompositePage(title="Welcome to Alfred!", uid="page10")
 
-        t10 = TextElement(texts["t10"])
-        c10 = CodeElement(code["c10"], lang="python")
-        t20 = TextElement(texts["t20"])
+        t10 = el.TextElement(texts["t10"])
+        c10 = el.CodeElement(code["c10"], lang="python")
+        t20 = el.TextElement(texts["t20"])
         p10.append(ex, t10, c10, t20)
 
         # --- page 20 --- #
         p20 = WebCompositePage(title="Pages and Sections", uid="page20")
 
         # elements to pages
-        t30 = TextElement(texts["t30"])
-        c20 = CodeElement(code["c20"], lang="python")
+        t30 = el.TextElement(texts["t30"])
+        c20 = el.CodeElement(code["c20"], lang="python")
 
         # pages to sections
-        t40 = TextElement(texts["t40"])
-        c30 = CodeElement(code["c30"], lang="python", first=False)
+        t40 = el.TextElement(texts["t40"])
+        c30 = el.CodeElement(code["c30"], lang="python", first=False)
 
         # sections to experiment
-        t50 = TextElement(texts["t50"])
-        c40 = CodeElement(code["c40"], lang="python", first=False)
+        t50 = el.TextElement(texts["t50"])
+        c40 = el.CodeElement(code["c40"], lang="python", first=False)
 
         # append elements to p20
         p20.append(ex, t30, c20, t40, c30, t50, c40)
@@ -93,22 +77,22 @@ class Script(object):
         # --- page 30 --- #
         p30 = WebCompositePage(title="Basic Input Elements", uid="page30")
 
-        t50 = TextElement("<hr><code>TextEntryElement()</code>")
-        t60 = TextElement("<hr><code>TextAreaElement()</code>")
-        t70 = TextElement(texts["t70"])  # RegEntryElement
-        t90 = TextElement("<hr><code>PasswordElement()</code>")
-        t80 = TextElement(texts["t80"])  # NumberEntryElement
+        t50 = el.TextElement("<hr><code>TextEntryElement()</code>")
+        t60 = el.TextElement("<hr><code>TextAreaElement()</code>")
+        t70 = el.TextElement(texts["t70"])  # RegEntryElement
+        t90 = el.TextElement("<hr><code>PasswordElement()</code>")
+        t80 = el.TextElement(texts["t80"])  # NumberEntryElement
 
-        c50 = CodeElement(code["c50"], lang="python")               # TextEntryElement
-        c60 = CodeElement(code["c60"], lang="python", first=False)  # TextAreaElement
-        c70 = CodeElement(code["c70"], lang="python", first=False)  # RegEntryElement
-        c90 = CodeElement(code["c90"], lang="python", first=False)  # PasswordElement
-        c80 = CodeElement(code["c80"], lang="python", first=False)  # NumberEntryElement
+        c50 = el.CodeElement(code["c50"], lang="python")               # TextEntryElement
+        c60 = el.CodeElement(code["c60"], lang="python", first=False)  # TextAreaElement
+        c70 = el.CodeElement(code["c70"], lang="python", first=False)  # RegEntryElement
+        c90 = el.CodeElement(code["c90"], lang="python", first=False)  # PasswordElement
+        c80 = el.CodeElement(code["c80"], lang="python", first=False)  # NumberEntryElement
 
-        textentry10 = TextEntryElement(
+        textentry10 = el.TextEntryElement(
             instruction="Please enter some text.",
             name="textentry10",     # name in data set. You should always give names to your input elements.
-            alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",       # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             default="default",      # default input value. Can be left empty.
             prefix=None,            # prefix to be displayed lefthand of the input area
@@ -116,10 +100,10 @@ class Script(object):
             force_input=False       # if True, input is mandatory. It's False by default.
         )
 
-        textarea10 = TextAreaElement(
+        textarea10 = el.TextAreaElement(
             instruction="Enter some more text.",
             name="textarea10",      # name in data set. You should always give names to your input elements.
-            alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",       # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             x_size=450,             # horizontal size in pixels
             y_size=150,             # vertical size in pixels
@@ -127,10 +111,10 @@ class Script(object):
             force_input=False       # if True, input is mandatory. It's False by default.
         )
 
-        regentry10 = RegEntryElement(
+        regentry10 = el.RegEntryElement(
             instruction="Enter an E-Mail address",
             name="regentry10",           # name in data set. You should always give names to your input elements.
-            alignment="left",            # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",            # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",          # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             reg_ex=r"[^@]+@[^\.]+\..+",  # regular expression for validation of user input. This is a very basic regex for email addresses.
             default="invalid input",     # default input value
@@ -140,10 +124,10 @@ class Script(object):
             match_hint="Message."        # hint to be displayed, if user input doesn't match the regular expression
         )
 
-        password10 = PasswordElement(
+        password10 = el.PasswordElement(
             instruction="Enter a password",
             name="password10",      # name in data set. You should always give names to your input elements.
-            alignment="left",       # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",       # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             password="friend",      # this is the password that needs to be entered
             default="Speak friend and enter.",                  # default input value
@@ -153,15 +137,15 @@ class Script(object):
             wrong_password_hint="The password is 'friend'."     # hint to be displayed if a wrong password is entered
         )
 
-        numberentry10 = NumberEntryElement(
+        numberentry10 = el.NumberEntryElement(
             instruction="Enter a number",
             name="numberentry10",           # name in data set. You should always give names to your input elements.
-            alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",               # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             decimals=3,                     # number of decimals allowed
             min=1.3,                        # minimum allowed value
             max=3.7,                        # maximum allowed value
-            default=1,                      # default input value
+            default=1.3,                      # default input value
             prefix=None,                    # prefix to be displayed lefthand of the input area
             suffix="suffix",                # suffix to be displayed righthand of the input area
             force_input=False               # if True, input is mandatory. It's False by default.
@@ -178,20 +162,20 @@ class Script(object):
         # --- page 30 --- #
         p40 = WebCompositePage(title="Choice Input Elements", uid="page40")
 
-        t100 = TextElement("<hr><code>SingleChoiceElement()</code>")
-        t110 = TextElement("<hr><code>MultipleChoiceElement()</code>")
-        t120 = TextElement("<hr><code>LikertElement()</code>")
-        t130 = TextElement("<hr><code>LikertMatrix()</code>")
+        t100 = el.TextElement("<hr><code>SingleChoiceElement()</code>")
+        t110 = el.TextElement("<hr><code>MultipleChoiceElement()</code>")
+        t120 = el.TextElement("<hr><code>LikertElement()</code>")
+        t130 = el.TextElement("<hr><code>LikertMatrix()</code>")
 
-        c100 = CodeElement(code["c100"], lang="python")               # SingleChoiceElement
-        c110 = CodeElement(code["c110"], lang="python", first=False)  # MultipleChoiceElement
-        c120 = CodeElement(code["c120"], lang="python", first=False)  # LikertElement
-        c130 = CodeElement(code["c130"], lang="python", first=False)  # LikertMatrix
+        c100 = el.CodeElement(code["c100"], lang="python")               # SingleChoiceElement
+        c110 = el.CodeElement(code["c110"], lang="python", first=False)  # MultipleChoiceElement
+        c120 = el.CodeElement(code["c120"], lang="python", first=False)  # LikertElement
+        c130 = el.CodeElement(code["c130"], lang="python", first=False)  # LikertMatrix
 
-        singlechoice10 = SingleChoiceElement(
+        singlechoice10 = el.SingleChoiceElement(
             instruction="Choose something",
             name="singlechoice10",          # name in data set. You should always give names to your input elements.
-            alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",               # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             default=1,                      # default input value (integer). The number refers to the position of the choice as defined in the item_labels argument.
             table_striped=False,            # if True, the element is displayed with a striped layout
@@ -202,10 +186,10 @@ class Script(object):
             force_input=False               # if True, input is mandatory. It's False by default.
         )
 
-        multiplechoice10 = MultipleChoiceElement(
+        multiplechoice10 = el.MultipleChoiceElement(
             instruction="Choose something",
             name="multiplechoice10",        # name in data set. You should always give names to your input elements.
-            alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",               # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             default=["0", "1", "0"],        # default: None. If specified, should be a list of the same length as item_labels.
                                             # A "1" means, the box should be ticked, a "0" means it should not be ticked.
@@ -217,10 +201,10 @@ class Script(object):
             force_input=False               # if True, input is mandatory. It's False by default.
         )
 
-        likertelement10 = LikertElement(
+        likertelement10 = el.LikertElement(
             instruction="Choose something",
             name="likertelement10",         # name in data set. You should always give names to your input elements.
-            alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",               # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             levels=7,                       # number of levels. Default: 7
             default=None,                   # default input value (integer, indicating the default level)
@@ -234,10 +218,10 @@ class Script(object):
             force_input=False               # if True, input is mandatory. It's False by default.
         )
 
-        likertmatrix10 = LikertMatrix(
+        likertmatrix10 = el.LikertMatrix(
             instruction="Enter something",
             name="likertmatrix10",          # name in data set. You should always give names to your input elements.
-            alignment="left",               # this is the defalult alignment. Also possible: "center" | "right"
+            alignment="left",               # this is the default alignment. Also possible: "center" | "right"
             font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
             levels=5,                       # number of levels. Default: 7
             items=3,                        # number of items. Default: 4
@@ -318,11 +302,12 @@ class Script(object):
         # --- Initialize and fill sections --- #
         main = Section()
         main.append(
-            p10, 
-            p20, 
+            p10,
+            p20,
             p30,
-            p40)
+            p40,
             p50,
+            looped_pages)
 
         # Append sections and pages to experiment
         exp.page_controller.append(main)
