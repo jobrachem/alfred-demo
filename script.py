@@ -263,6 +263,58 @@ class Script(object):
             t130, likertmatrix10, c130
             )
 
+        p50 = WebCompositePage(title="Content Display Elements", uid="p50")
+
+        v10 = el.WebVideoElement(
+            # instruction="This is a Video.",
+            # name="v10",
+            width="560",
+            height="315",
+            ogg_url="https://www.youtube.com/embed/EK32jo7i5LQ",
+            controls=True,
+            autoplay=False,
+            loop=False
+        )
+
+        # a10 = el.WebAudioElement(
+        #     # instruction="This is an audio element.",
+        #     # name="a10",
+        #     mp3_url=None,
+        #     autoplay=False,
+        #     loop=False
+        # )
+
+        # i10 = el.ImageElement(
+        #     # instruction="This is an image.",
+        #     # name="i10",
+        #     url=None,
+        #     x_size=None,
+        #     y_size=None,
+        #     maximizable=True
+        # )
+
+        p50.append(
+            v10,
+            #a10,
+            #i10
+            )
+
+
+        looped_pages = Section()    # Standard section. This will contain all pages created by the loop.
+        n_pages = 3                 # Number of pages to create
+
+        for i in range(n_pages):    # Loop for page creation.
+            i += 1                  # Since Python starts counting at 0, we add 1 to get the actual page number
+
+            # The following code defines a single page, using the index i to vary content.
+            page = WebCompositePage(title="Looped page {}".format(i), uid="looped_page{}".format(i))
+            page_text10 = el.TextElement("This is looped page number {}".format(i))
+            page_text20 = el.TextElement(texts["page_text20"])
+            page_code10 = el.CodeElement(code["page_code10"], lang="python")
+            page.append(page_text10, page_text20, page_code10)
+
+            looped_pages.append(page)   # Add the page to our section at the end of each iteration.
+
         # --- Initialize and fill sections --- #
         main = Section()
         main.append(
@@ -270,6 +322,7 @@ class Script(object):
             p20, 
             p30,
             p40)
+            p50,
 
         # Append sections and pages to experiment
         exp.page_controller.append(main)
