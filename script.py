@@ -4,6 +4,7 @@ from alfred.section import Section
 from alfred.helpmates import parse_xml_to_dict
 import alfred.element as el
 import alfred
+import os
 
 
 #################################################
@@ -11,9 +12,7 @@ import alfred
 #################################################
 
 
-# import the .xml file, containing text snippets
-texts = parse_xml_to_dict("files/text_snippets.xml")
-code = parse_xml_to_dict("files/code_snippets.xml", code=True)
+
 
 #################################
 # - Section 3: Custom classes - #
@@ -36,9 +35,13 @@ class ExitEnabler(el.Element, el.WebElementInterface):
 ########################################
 
 
-def generate_experiment(self):
+def generate_experiment(self, path):
 
     # --- START OF EDITABLE AREA --- #
+    # imp = Importer(path)
+    # import the .xml file, containing text snippets
+    texts = parse_xml_to_dict(os.path.join(path, "files/text_snippets.xml"))
+    code = parse_xml_to_dict(os.path.join(path, "files/code_snippets.xml"), code=True)
 
     ex = ExitEnabler()
 
@@ -235,11 +238,12 @@ def generate_experiment(self):
         t130, likertmatrix10, c130
         )
 
+
     # --- IMAGE page --- #
     p50 = WebCompositePage(title="Image Display", uid="p50")
     t140 = el.TextElement("<code>ImageElement()</code> is an element for quick and easy incorporation of pictures into an experiment.")
     i10 = el.ImageElement(
-        path="files/sample_img.jpeg",   # path to image in experiment directory
+        path=os.path.join(path, "files/sample_img.jpeg"),   # path to image in experiment directory
         name="i10",
         url=None,                       # alternative: url to image
         x_size=None,                    # vertical image size (in px)
@@ -248,7 +252,6 @@ def generate_experiment(self):
     )
     t150 = el.TextElement("Photo by Jonas Verstuyft on unsplash.com")
     c140 = el.CodeElement(code["c140"], toggle_button=False, lang="python")
-
     p50.append(t140, i10, t150, c140)
 
     # --- AUDIO page --- #
@@ -257,7 +260,7 @@ def generate_experiment(self):
     a10 = el.WebAudioElement(
         name="a10",
 
-        mp3_path="files/sample_audio.mp3",   # path to audio file in experiment directory
+        mp3_path=os.path.join(path, "files/sample_audio.mp3"),   # path to audio file in experiment directory
         mp3_url=None,                        # alternative: url to audio file
 
         controls=True,
@@ -275,7 +278,7 @@ def generate_experiment(self):
     v10 = el.WebVideoElement(
         name="v10",
 
-        mp4_path="files/sample_video.mp4",   # path to video file in experiment directory
+        mp4_path=os.path.join(path, "files/sample_video.mp4"),   # path to video file in experiment directory
         mp4_url=None,                        # alternative: url to video file
 
         controls=True,
@@ -315,11 +318,9 @@ def generate_experiment(self):
         p70,
         looped_pages)
 
-    # Append sections and pages to experiment
+    # --- END OF EDITABLE AREA --- #
     exp = alfred.Experiment()
     exp.append(main)
-
-    # --- END OF EDITABLE AREA --- #
 
     return exp
 
