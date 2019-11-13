@@ -1,20 +1,11 @@
 # Demo for Alfred Experiments
 
-This a demo for script-based experiments in the Python 3 library alfred ([https://github.com/ctreffe/alfred](https://github.com/ctreffe/alfred)).
+This a demo for script-based experiments in the Python 3 library Alfred ([https://github.com/ctreffe/alfred](https://github.com/ctreffe/alfred)).
+
+**Note**: This demo experiment uses Alfred's current development version. To run it yourself, you need to install Alfred from its "develop" branch on GitHub. Still, the code demonstrated in the demo experiment works with the current stable version (v0.3b1).
 
 ## How to run this experiment
 
+1. Download or clone the repository to your local machine.
 
-1. Open a terminal window (MAC) or a command line (Windows)
-2. Install alfred with the following command: 
-
-```bash
-pip install git+https://github.com/ctreffe/alfred.git@master#egg=alfred
-```
-3. Change to your desired directory: `cd <path>`
-4. Clone the repository to your local machine: 
-
-```bash
-git clone https://github.com/jobrachem/alfred-demo.git
-```
-5. Run the experiment with the following command: `python run.py`
+2. Run the experiment with the following command: `python script.py`
