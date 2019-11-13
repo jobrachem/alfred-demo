@@ -23,6 +23,16 @@
 t10 = TextElement(text="...", name="text10", alignment="left", font_size="normal")
     </c10>
 
+    <c11>
+import alfred.element as el
+text01 = el.TextElement("...", name="text01")
+    </c11>
+
+    <c12>
+from alfred.element import TextElement
+text01 = TextElement("...", name="text01")
+    </c12>
+
     <c20>
 # initialize the page
 p20 = WebCompositePage(title="Adding Elements to Pages", 
@@ -50,19 +60,15 @@ main.append(p10, p20)
     <c40>
 # Append sections to experiment
 # You can also append single pages here
-exp.page_controller.append(main)
+exp.append(main)
     </c40>
 
     <c50>
 textentry10 = TextEntryElement(
     instruction="Please enter some text.",
-    name="textentry10",     # name in data set
-    alignment="left",       # this is the defaullt alignment. Also possible: "center" | "right"
-    font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
-    default="default",      # default input value
-    prefix=None,            # prefix to be displayed lefthand of the input area
-    suffix="suffix",        # suffix to be displayed righthand of the input area
-    force_input=True        # make input mandatory
+    name="textentry10",     # name in data set. You should always give names to your input elements.
+
+    prefix="prefix"         # prefix to be displayed righthand of the input area
 )
     </c50>
 
@@ -70,12 +76,9 @@ textentry10 = TextEntryElement(
 textarea10 = TextAreaElement(
     instruction="Enter some more text.",
     name="textarea10",      # name in data set. You should always give names to your input elements.
-    alignment="left",       # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+
     x_size=450,             # horizontal size in pixels
-    y_size=150,             # vertical size in pixels
-    default="Default",      # default input value
-    force_input=True        # make input mandatory. It's optional by default.
+    y_size=150              # vertical size in pixels
 )
     </c60>
 
@@ -83,14 +86,11 @@ textarea10 = TextAreaElement(
 regentry10 = RegEntryElement(
     instruction="Enter an E-Mail address",
     name="regentry10",           # name in data set. You should always give names to your input elements.
-    alignment="left",            # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",          # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+ 
     reg_ex=r"[^@]+@[^\.]+\..+",  # regular expression for validation of user input. This is a very basic regex for email addresses.
-    default="invalid input",     # default input value
-    prefix=None,                 # prefix to be displayed lefthand of the input area
-    suffix=None,                 # suffix to be displayed righthand of the input area
-    force_input=False,           # if True, input is mandatory. It's False by default.
-    match_hint="Message."        # hint to be displayed, if user input doesn't match the regular expression
+    match_hint="Message",        # hint to be displayed, if user input doesn't match the regular expression
+
+    suffix="suffix"              # suffix to be displayed righthand of the input area
 )
     </c70>
 
@@ -98,15 +98,10 @@ regentry10 = RegEntryElement(
 numberentry10 = NumberEntryElement(
     instruction="Enter a number",
     name="numberentry10",           # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+
     decimals=3,                     # number of decimals allowed
     min=1.3,                        # minimum allowed value
     max=3.7,                        # maximum allowed value
-    default=1,                      # default input value
-    prefix=None,                    # prefix to be displayed lefthand of the input area
-    suffix="suffix",                # suffix to be displayed righthand of the input area
-    force_input=True                # if True, input is mandatory. It's False by default.
 )
     </c80>
 
@@ -114,13 +109,8 @@ numberentry10 = NumberEntryElement(
 password10 = PasswordElement(
     instruction="Enter a password",
     name="password10",      # name in data set. You should always give names to your input elements.
-    alignment="left",       # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",     # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+
     password="friend",      # this is the password that needs to be entered
-    default="Speak friend and enter.",                  # default input value
-    prefix=None,                                        # prefix to be displayed lefthand of the input area
-    suffix=None,                                        # suffix to be displayed righthand of the input area
-    force_input=False,                                  # if True, input is mandatory. It's False by default.
     wrong_password_hint="The password is 'friend'."     # hint to be displayed if a wrong password is entered
 )        
     </c90>
@@ -129,15 +119,15 @@ password10 = PasswordElement(
 singlechoice10 = SingleChoiceElement(
     instruction="Choose something",
     name="singlechoice10",          # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
-    default=1,                      # default input value (integer). The number refers to the position of the choice as defined in the item_labels argument.
-    table_striped=False,            # if True, the element is displayed with a striped layout
+
     item_labels=["Choice 1",        # definition of available choices. Should be a list of strings.
                  "Choice 2",        # each element of the list is a choice
                  "Choice 3"],
+    
+    table_striped=False,            # if True, the element is displayed with a striped layout
+
     shuffle=False,                  # default: False. If True, the order of available choices is shuffled
-    force_input=True                # if True, input is mandatory. It's False by default.
+    default=1                       # default input value (integer). The number refers to the position of the choice as defined in the item_labels argument.
 )
     </c100>
     
@@ -146,16 +136,16 @@ singlechoice10 = SingleChoiceElement(
 multiplechoice10 = MultipleChoiceElement(
     instruction="Choose something",
     name="multiplechoice10",        # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
-    default=["0", "1", "0"],        # default: None. If specified, should be a list of the same length as item_labels.
-                                    # A "1" means, the box should be ticked, a "0" means it should not be ticked.
-    table_striped=False,            # if True, the element is displayed with a striped layout
+
     item_labels=["Choice 1",        # definition of available choices. Should be a list of strings.
                  "Choice 2",        # each element of the list is a choice
                  "Choice 3"],
+
+    table_striped=False,            # if True, the element is displayed with a striped layout
+
     shuffle=False,                  # default: False
-    force_input=True                # if True, input is mandatory. It's False by default.
+    default=["0", "1", "0"]         # default: None. If specified, should be a list of the same length as item_labels.
+                                    # A "1" means, the box should be ticked, a "0" means it should not be ticked.
 )        
     </c110>
 
@@ -163,18 +153,19 @@ multiplechoice10 = MultipleChoiceElement(
 likertelement10 = LikertElement(
     instruction="Choose something",
     name="likertelement10",         # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+
     levels=7,                       # number of levels. Default: 7
-    default=None,                   # default input value (integer, indicating the default level)
+
     item_labels=["Left label", "Right label"],      # labels to the left and right side
     top_scale_labels=[                              # labels to be shown above each level (list with one element per level)
         "1", "2", "3", "4",
         "5", "6", "7"],
     bottom_scale_labels=None,       # labels to be shown below each choice (like top_scale_labels)
+    
     transpose=False,                # default: False. If True, the levels are stacked vertically instead of horizontally
     spacing=30,                     # default: 30. How much space (in px) should be between the levels
-    force_input=False               # if True, input is mandatory. It's False by default.
+    
+    default=None                    # default input value (integer, indicating the default level)
 )
     </c120>
 
@@ -182,11 +173,10 @@ likertelement10 = LikertElement(
 likertmatrix10 = LikertMatrix(
     instruction="Enter something",
     name="likertmatrix10",          # name in data set. You should always give names to your input elements.
-    alignment="left",               # this is the default alignment. Also possible: "center" | "right"
-    font_size="normal",             # this is the default font_size. Also possible: "big" | "huge" | "12" (or any size in pt)
+
     levels=5,                       # number of levels. Default: 7
     items=3,                        # number of items. Default: 4
-    default=None,                   # default input value (integer, indicating the default level). The same default is used for all items.
+
     item_labels=[                   # labels to the left and right side. Each item is associated with two elements of the list.
         "item 1, left", "item 1, right",
         "item 2, left", "item 2, right",
@@ -194,11 +184,13 @@ likertmatrix10 = LikertMatrix(
     ],
     top_scale_labels=["1", "2", "3", "4", "5"],     # labels to be shown above each level (list with one element per level)
     bottom_scale_labels=None,                       # labels to be shown below each choice (like top_scale_labels)
-    transpose=False,                # if True, items are shown in columns instead of rows
+    
     table_striped=False,            # if True, the element is displayed with a striped layout
-    shuffle=False,                  # default: False. If True, the order of available choices is shuffled
+    transpose=False,                # if True, items are shown in columns instead of rows
     spacing=30,                     # default: 30. How much space (in px) should be between the levels
-    force_input=False               # if True, input is mandatory. It's False by default.
+    
+    shuffle=False,                  # default: False. If True, the order of available choices is shuffled
+    default=None                    # default input value (integer, indicating the default level). The same default is used for all items.
 )
     </c130>
 
@@ -211,12 +203,44 @@ for i in range(n_pages):    # Loop for page creation.
 
     # The following code defines a single page, using the index i to vary content.
     page = WebCompositePage(title="Looped page {}".format(i), uid="looped_page{}".format(i))
-    page_text10 = el.TextElement("This is looped page number {}".format(i))
-    page_text20 = el.TextElement(texts["page_text20"])
-    page_code10 = el.CodeElement(code["page_code10"], lang="python")
-    page.append(page_text10, page_text20, page_code10)
+    p_text10 = el.TextElement("This is looped page number {}".format(i))
+    p_text20 = el.TextElement(texts["page_text20"])
+    p_code10 = el.CodeElement(code["page_code10"], lang="python")
+    page.append(p_text10, p_text20, p_code10)
 
     looped_pages.append(page)   # Add the page to our section at the end of each iteration.
     </page_code10>
+
+    <c140>
+i10 = ImageElement(
+    path="files/sample_img.jpeg",   # path to image in experiment directory
+    url=None,                       # alternative to path: url to image on the internet
+    x_size=None,                    # vertical image size (in px). The default (None) leads to automatic sizing.
+    y_size=None                     # horizontal image size (in px). The default (None) leads to automatic sizing.
+)
+    </c140>
+
+    <c150>
+a10 = WebAudioElement(
+    mp3_path="files/sample_audio.mp3",   # path to audio file in experiment directory
+    mp3_url=None,                        # alternative: url to audio file
+
+    controls=True,                       # set to False to turn off the control elements
+    autoplay=False,                      # set to True, to make the file play automatically
+    loop=False                           # set to True, to make the file play in a loop
+)
+    </c150>
+
+
+    <c160>
+v10 = WebVideoElement(
+    mp4_path="files/sample_audio.mp4",   # path to video file in experiment directory
+    mp4_url=None,                        # alternative: url to video file
+
+    controls=True,                       # set to False to turn off the control elements
+    autoplay=False,                      # set to True, to make the file play automatically
+    loop=False                           # set to True, to make the file play in a loop
+)
+    </c160>
 
 </instr>

@@ -38,6 +38,20 @@
         
     </t20>
 
+    <t21>
+        <![CDATA[
+            <h4>Importing elements and other classes</h4>
+            Elements like the <code>TextElement()</code>, as well as pages and sections, need to be imported from the Alfred library at the beginning of your script.py. There are two recommended ways of doing this. You can import a full module and give it a shorter name for reference. In this case, you embed an element by prefixing it with the abbreviation that you defined for the module (is this case <code>el</code>).
+        ]]>
+        
+    </t21>
+
+    <t22>
+        <![CDATA[
+             The second option is to import specific classes from a module individually. In this case, you embed the element directly.
+        ]]>
+    </t22>
+
     <t30>
         <![CDATA[
             <h4>Adding Elements to Pages</h4>
@@ -68,12 +82,42 @@
     <t50>
         <![CDATA[
             <h4>Adding Sections to the Experiment</h4>
-            After adding your pages to sections, you need to add the sections to your experiment. You can do so by adding them in the <code>experiment.page_controller</code>'s <code>.append()</code> method near the end of your script.py file.
+            After adding your pages to sections, you need to add the sections to your experiment. You can do so by adding them in the <code>experiment.page_controller</code>'s <code>.append()</code> method near the end of your script.py file. If you don't need sectins, you can simply add you pages directly to the experiment.
 
             Click on "Show/Hide Code" below to see the source code for adding the "main" section from above to the experiment.
             
         ]]>
     </t50>
+
+    <t51>
+        <![CDATA[
+            <h4>Shared parameters</h4>
+            There are some parameters that all elements share:
+
+            <code>instruction</code>: Takes a string input. This parameter contains the text used to intruct participants.
+
+            <code>alignment</code>: Can take the values <i>"left"</i> (default), <i>"right"</i>, and <i>"center"</i>. This parameter is used to control the element's alignment on a page.
+
+            <code>font_size</code>: Can take the values <i>"normal"</i> (default), <i>"big"</i>, and <i>"huge"</i>. This parameter is used to control the element's font size. You can also enter the desired size directly as a number (in pt).
+
+            <code>force_input</code>: Can take the values <i>True</i> and <i>False</i> (default). This parameter controls, whether an element is optional or not. The default is optional.
+
+            <code>default</code>: This parameter can be used to set the default value of an element. For most basic input elements, it is a string, in the other cases we show how it should be used for each element.
+            
+        ]]>
+    </t51>
+
+    <t52>
+        <![CDATA[
+            <h4>Shared parameters of basic input elements</h4>
+            There are some parameters that all basic elements (next page) share:
+
+            <code>prefix</code>: Takes a string input, that will be displayed as a prefix to the element. An example is shown on in the <code>TextEntryElement()</code> (next page).
+
+            <code>suffix</code>: Takes a string input, that will be displayed as a suffix to the element. An example is shown on in the <code>RegEntryElement()</code> (next page).
+            
+        ]]>
+    </t52>    
 
     <t70><![CDATA[
             <hr><code>RegEntryElement()</code>
@@ -94,5 +138,13 @@
         ]]>
 
     </page_text20>
+
+    <t160>
+        <![CDATA[
+        <code>WebAudioElement()</code> is an element for quick and easy incorporation of audio files into an experiment. Next to .mp3, you can also include .wav and .ogg files.
+        ]]>
+    </t160>
+
+
 
 </instr>
