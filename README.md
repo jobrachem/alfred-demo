@@ -8,4 +8,4 @@ This a demo for script-based experiments in the Python 3 library Alfred ([https:
 
 1. Download or clone the repository to your local machine.
 
-2. Run the experiment with the following command: `python script.py`
+2. Run the experiment with the following command: `python run.py`
