@@ -12,7 +12,7 @@ import alfred.element as el
 
 class ExitEnabler(el.Element, el.WebElementInterface):
     """
-    Add this invisible element to any WebCompositeQuestion to allow easy leaving without warning message.
+    Add this invisible element to any Page to allow easy leaving without warning message.
     """
     @property
     def web_widget(self):
