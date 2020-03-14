@@ -1,21 +1,12 @@
-
-from alfred.page import WebCompositePage
+# -*- coding: utf-8 -*-
+from alfred import Experiment
+from alfred.page import Page
 from alfred.section import Section
 from alfred.helpmates import parse_xml_to_dict
 import alfred.element as el
-import alfred
-import os
-
-
-#################################################
-# - Section 2: Global variables and functions - #
-#################################################
-
-
-
 
 #################################
-# - Section 3: Custom classes - #
+# - Custom classes - #
 #################################
 
 
@@ -29,24 +20,23 @@ class ExitEnabler(el.Element, el.WebElementInterface):
         return widget
     
 
-
 ########################################
-# - Section 4: Experiment generation - #
+# - Experiment generation - #
 ########################################
 
 
-def generate_experiment(self, path):
+def generate_experiment(self, config=None):
+    exp = Experiment(config=config)
 
     # --- START OF EDITABLE AREA --- #
-    # imp = Importer(path)
     # import the .xml file, containing text snippets
-    texts = parse_xml_to_dict(os.path.join(path, "files/text_snippets.xml"))
-    code = parse_xml_to_dict(os.path.join(path, "files/code_snippets.xml"), code=True)
+    texts = parse_xml_to_dict("files/text_snippets.xml")
+    code = parse_xml_to_dict("files/code_snippets.xml", code=True)
 
     ex = ExitEnabler()
 
     # --- page 10 --- #
-    p10 = WebCompositePage(title="Welcome to Alfred!", uid="page10")
+    p10 = Page(title="Welcome to Alfred!", uid="page10")
 
     t10 = el.TextElement(texts["t10"])
     c10 = el.CodeElement(code["c10"], lang="python")
@@ -54,7 +44,7 @@ def generate_experiment(self, path):
     p10.append(ex, t10, c10, t20)
 
     # --- page 20 --- #
-    p20 = WebCompositePage(title="Pages and Sections", uid="page20")
+    p20 = Page(title="Pages and Sections", uid="page20")
 
     t21 = el.TextElement(texts["t21"])
     t22 = el.TextElement(texts["t22"])
@@ -77,7 +67,7 @@ def generate_experiment(self, path):
     p20.append(ex, t21, c11, t22, c12, t30, c20, t40, c30, t50, c40)
 
     # --- page 30 --- #
-    p30 = WebCompositePage(title="Basic Input Elements", uid="page30")
+    p30 = Page(title="Basic Input Elements", uid="page30")
 
     t51 = el.TextElement(texts["t51"])
     t52 = el.TextElement(texts["t52"])
@@ -85,7 +75,7 @@ def generate_experiment(self, path):
     p30.append(ex, t51, t52)
 
     # --- page 31 --- #
-    p31 = WebCompositePage(title="Basic Input Elements", uid="page31")
+    p31 = Page(title="Basic Input Elements", uid="page31")
 
     t54 = el.TextElement("<hr><code>TextEntryElement()</code>")
     t60 = el.TextElement("<hr><code>TextAreaElement()</code>")
@@ -151,7 +141,7 @@ def generate_experiment(self, path):
         )
 
     # --- page 30 --- #
-    p40 = WebCompositePage(title="Choice Input Elements", uid="page40")
+    p40 = Page(title="Choice Input Elements", uid="page40")
 
     t100 = el.TextElement("<hr><code>SingleChoiceElement()</code>")
     t110 = el.TextElement("<hr><code>MultipleChoiceElement()</code>")
@@ -240,10 +230,10 @@ def generate_experiment(self, path):
 
 
     # --- IMAGE page --- #
-    p50 = WebCompositePage(title="Image Display", uid="p50")
+    p50 = Page(title="Image Display", uid="p50")
     t140 = el.TextElement("<code>ImageElement()</code> is an element for quick and easy incorporation of pictures into an experiment.")
     i10 = el.ImageElement(
-        path=os.path.join(path, "files/sample_img.jpeg"),   # path to image in experiment directory
+        path="files/sample_img.jpeg",   # path to image in experiment directory
         name="i10",
         url=None,                       # alternative: url to image
         x_size=None,                    # vertical image size (in px)
@@ -255,12 +245,12 @@ def generate_experiment(self, path):
     p50.append(t140, i10, t150, c140)
 
     # --- AUDIO page --- #
-    p60 = WebCompositePage(title="Audio presentation", uid="p60")
+    p60 = Page(title="Audio presentation", uid="p60")
     t160 = el.TextElement("<code>WebAudioElement()</code> is an element for quick and easy incorporation of audio files into an experiment.")
     a10 = el.WebAudioElement(
         name="a10",
 
-        mp3_path=os.path.join(path, "files/sample_audio.mp3"),   # path to audio file in experiment directory
+        mp3_path="files/sample_audio.mp3",   # path to audio file in experiment directory
         mp3_url=None,                        # alternative: url to audio file
 
         controls=True,
@@ -273,12 +263,12 @@ def generate_experiment(self, path):
     p60.append(t160, a10, t170, c150)
 
     # --- VIDEO page --- #
-    p70 = WebCompositePage(title="Video presentation", uid="p70")
+    p70 = Page(title="Video presentation", uid="p70")
     t180 = el.TextElement("<code>WebVideoElement()</code> is an element for quick and easy incorporation of video files into an experiment.")
     v10 = el.WebVideoElement(
         name="v10",
 
-        mp4_path=os.path.join(path, "files/sample_video.mp4"),   # path to video file in experiment directory
+        mp4_path="files/sample_video.mp4",   # path to video file in experiment directory
         mp4_url=None,                        # alternative: url to video file
 
         controls=True,
@@ -298,7 +288,7 @@ def generate_experiment(self, path):
         i += 1                  # Since Python starts counting at 0, we add 1 to get the actual page number
 
         # The following code defines a single page, using the index i to vary content.
-        page = WebCompositePage(title="Looped page {}".format(i), uid="looped_page{}".format(i))
+        page = Page(title="Looped page {}".format(i), uid="looped_page{}".format(i))
         page_text10 = el.TextElement("This is looped page number {}".format(i))
         page_text20 = el.TextElement(texts["page_text20"])
         page_code10 = el.CodeElement(code["page_code10"], lang="python")
@@ -319,9 +309,7 @@ def generate_experiment(self, path):
         looped_pages)
 
     # --- END OF EDITABLE AREA --- #
-    exp = alfred.Experiment()
+    
     exp.append(main)
 
     return exp
-
-alfred.run(generate_experiment)
